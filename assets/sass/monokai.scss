@@ -1,0 +1,29 @@
+$charcolor: #bbbbbb;
+body {
+    background: #1b1d1e;
+
+    #terminal {
+        color: $charcolor;
+    }
+
+    #user {
+        color: #23e298;
+    }
+
+    #dir {
+        color: #d08010;
+    }
+
+    .Typewriter__cursor {
+        color: $charcolor;
+    }
+}
+
+a {
+    color: lighten($charcolor, 20%);
+    text-decoration: none;
+    transition:.25s;
+}
+a:hover {
+    color: darken($charcolor, 30%);
+}

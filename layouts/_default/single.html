@@ -1,0 +1,36 @@
+{{ define "main" }}
+    
+    {{ $title := printf "<h1 id='title'>%s</h1>" .Title}}
+    
+    {{ $env := printf "<strong><span id=user>%s@%s</span><span id=terminal>:</span><span id=dir>~/%s%s</span></strong><span id=terminal>$</span>" .Site.Params.Terminal.userName .Site.Params.Terminal.pcName .Site.Params.Terminal.workDir "" | safeHTML }}
+    {{ $cd := printf "%s <span id=terminal>cd %s</span><br>" $env .Site.Params.Tree.folderName | safeHTML }}
+    {{ $env := printf "<strong><span id=user>%s@%s</span><span id=terminal>:</span><span id=dir>~/%s/%s</span></strong><span id=terminal>$</span>" .Site.Params.Terminal.userName .Site.Params.Terminal.pcName .Site.Params.Terminal.workDir .Site.Params.Tree.folderName | safeHTML }}
+    {{ $cat := printf "%s <span id=terminal>cat %s</span><br>" $env .Title | safeHTML }}
+    {{ $end := printf "%s <span id=terminal><a href='%s'>cd ~</a></span>" $env .Site.BaseURL | safeHTML }}
+    
+    {{ $content := .Content }}
+
+    {{ $tree := "" }}
+    {{ $leaf := "" }}
+    {{ if .Site.Params.Tree.use }}
+    {{ $tree = printf "%s <span id=terminal>tree ./</span><br>" $env }}
+    {{ $leaf = printf "%s<strong><span id=dir>./</span></strong><br>" $leaf  }}
+        {{ range $index, $val := .Site.RegularPages }}
+            {{ $ac := .Title }}
+            {{ $link := .Permalink }}
+            {{ if ne (substr $link 0 4) "http"}}
+                {{ $l := $.Site.GetPage $link }}
+                {{ $link = $l.Permalink }}
+            {{ end }}
+            {{ if eq (add $index 1) (len $.Site.RegularPages) }}
+            {{ $leaf = printf "<span id=terminal>%s└── <a href='%s'>%s</a></span><br>" $leaf $link $ac}}
+            {{ else }}
+            {{ $leaf = printf "<span id=terminal>%s├── <a href='%s'>%s</a></span><br>" $leaf $link $ac}}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+
+    {{ $payload := delimit (slice $cd $cat "<span id=terminal>" $title $content "</span>" $tree $leaf $end) "" }}
+    {{ $delay := $.Site.Params.Terminal.activityDelay }}
+    {{ partial "partials/typewriter.html" (dict "context" . "payload" $payload "delay" $delay )}}
+{{ end }}
