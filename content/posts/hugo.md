@@ -14,7 +14,7 @@ The blog site you are looking at right now was generated with hugo in about 62ms
 
 ### What is that markdown thing?
 
-Markdown is a simple way to have a page formated without having to know all of the varrious HTML bits to do so. 
+Markdown is a simple way to have a page formatted without having to know all of the various HTML bits to do so. 
 For example, the 'code' below...
 
 ```markdown
