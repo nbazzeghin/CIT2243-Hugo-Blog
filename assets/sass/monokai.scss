@@ -19,6 +19,12 @@ body {
     }
 }
 
+code {
+    background-color:#282a36;
+    border-radius: 3px;
+    font-size: 85%
+}
+
 a {
     color: lighten($charcolor, 20%);
     text-decoration: none;

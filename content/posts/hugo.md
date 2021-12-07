@@ -1,7 +1,7 @@
 ---
 title: "Hugo"
-date: 2021-09-27T20:48:19-05:00
-draft: true
+date: 2021-10-04T20:48:19-05:00
+draft: false
 ---
 
 ### What is this thing?
@@ -67,3 +67,5 @@ echo ""
 ```
 This script will start you off with the terminal theme. For more details check out the docs here:
 https://themes.gohugo.io/themes/hugo-theme-terminal
+
+or visit the main site https://gohugo.io/
